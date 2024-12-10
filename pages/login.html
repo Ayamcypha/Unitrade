@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - UniTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/"><h1>UNITRADE</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/pages/browse.html">Browse</a>
+            <a href="/pages/post-ad.html">Post Ad</a>
+            <a href="/pages/messages.html">Messages</a>
+            <div class="auth-buttons">
+                <a href="/pages/login.html" class="login-btn active">Login</a>
+                <a href="/pages/register.html" class="register-btn">Register</a>
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="auth-container">
+        <div class="auth-form">
+            <h2>Welcome Back!</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <small class="form-hint text-right">
+                        <a href="/pages/forgot-password.html" class="forgot-password">Forgot Password?</a>
+                    </small>
+                </div>
+                <button type="submit" class="auth-button">Login</button>
+            </form>
+            <p class="auth-link">Don't have an account? <a href="/pages/register.html">Register here</a></p>
+        </div>
+    </div>
+
+    <!-- Toast Messages -->
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

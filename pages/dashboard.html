@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - UniTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/"><h1>UNITRADE</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/pages/browse.html">Browse</a>
+            <a href="/pages/post-ad.html">Post Ad</a>
+            <a href="/pages/messages.html">Messages</a>
+            <div class="auth-buttons">
+                <a href="/pages/profile.html" class="profile-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <div class="welcome-content">
+                <h1>Welcome Back, <span id="userName"></span></h1>
+                <p>Manage your listings and track your sales</p>
+            </div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-tag"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Active Listings</h3>
+                    <p id="activeListings">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Total Sales</h3>
+                    <p id="totalSales">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Saved Items</h3>
+                    <p id="savedItems">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Messages</h3>
+                    <p id="unreadMessages">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="dashboard-content">
+            <!-- Recent Activity -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                <div class="activity-list">
+                    <div class="empty-state">
+                        <i class="fas fa-history"></i>
+                        <h3>No Recent Activity</h3>
+                        <p>Your recent activities will appear here</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Listings -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Your Listings</h2>
+                    <a href="/pages/post-ad.html" class="create-listing-btn">
+                        <i class="fas fa-plus"></i> Create New
+                    </a>
+                </div>
+                <div class="listings-grid">
+                    <div class="empty-state">
+                        <i class="fas fa-tag"></i>
+                        <h3>No Active Listings</h3>
+                        <p>Start selling by creating your first listing</p>
+                        <a href="/pages/post-ad.html" class="btn primary">Create Listing</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Messages -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>Recent Messages</h2>
+                    <a href="/pages/messages.html" class="view-all">View All</a>
+                </div>
+                <div class="messages-list">
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <h3>No Messages</h3>
+                        <p>Your conversations will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Messages -->
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

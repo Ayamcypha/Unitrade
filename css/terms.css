@@ -1,0 +1,130 @@
+.terms-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.terms-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.terms-header h1 {
+    color: #4f46e5;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.terms-header p {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.terms-content {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.terms-section {
+    margin-bottom: 2.5rem;
+}
+
+.terms-section:last-child {
+    margin-bottom: 0;
+}
+
+.terms-section h2 {
+    color: #1f2937;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4f46e5;
+    display: inline-block;
+}
+
+.terms-section p {
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.terms-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.terms-section ul li {
+    color: #4b5563;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.terms-section ul li::before {
+    content: "•";
+    color: #4f46e5;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.terms-section strong {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.terms-section a {
+    color: #4f46e5;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.terms-section a:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .terms-container {
+        margin: 1rem auto;
+        padding: 0 1rem;
+    }
+
+    .terms-header h1 {
+        font-size: 2rem;
+    }
+
+    .terms-content {
+        padding: 1.5rem;
+    }
+
+    .terms-section h2 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar {
+        display: none;
+    }
+
+    .terms-container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .terms-content {
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .terms-section {
+        page-break-inside: avoid;
+    }
+}

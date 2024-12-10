@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Listings - UniTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/browse.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body background="pexels-tima-miroshnichenko-6169651.jpg">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="../index.html"><h1>UNITRADE</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="browse.html" class="active">Browse</a>
+            <a href="post-ad.html">Post Ad</a>
+            <a href="messages.html">Messages</a>
+            <div class="auth-buttons">
+                <!-- Will be populated by auth.js -->
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Search and Filter Section -->
+    <div class="search-filter-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search for items...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="filters">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="textbooks">Textbooks</option>
+                <option value="electronics">Electronics</option>
+                <option value="furniture">Furniture</option>
+                <option value="clothing">Clothing</option>
+                <option value="services">Services</option>
+                <option value="other">Other</option>
+            </select>
+            <select id="priceFilter">
+                <option value="">Price Range</option>
+                <option value="0-10">£0 - £10</option>
+                <option value="10-50">£10 - £50</option>
+                <option value="50-100">£50 - £100</option>
+                <option value="100+">£100+</option>
+            </select>
+            <select id="sortFilter">
+                <option value="newest">Newest First</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="popular">Most Popular</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Listings Grid -->
+    <div class="listings-container">
+        <div class="listings-grid" id="listingsGrid">
+            <!-- Listings will be dynamically populated -->
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading listings...</p>
+        </div>
+
+        <!-- Load More Button -->
+        <button class="load-more-btn" id="loadMoreBtn">
+            Load More Listings
+        </button>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-content">
+            <div class="chat-header">
+                <h3>Chat with Seller</h3>
+                <button class="close-chat"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be dynamically populated -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type your message...">
+                <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/browse.js"></script>
+</body>
+</html>

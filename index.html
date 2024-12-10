@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTrade - Student Marketplace</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body background="pexels-tima-miroshnichenko-6169651.jpg">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="nav-left">
+                <div class="nav-brand">
+                    <a href="/"><h1>UNITRADE</h1></a>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="navSearchInput" placeholder="Search items...">
+                    <button onclick="window.location.href='/pages/search.html?q=' + document.getElementById('navSearchInput').value">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="/" class="active">Home</a>
+                    <a href="/pages/browse.html">Browse</a>
+                    <a href="/pages/post-ad.html">Post Ad</a>
+                    <a href="/pages/messages.html">
+                        <i class="fas fa-envelope"></i>
+                        <span>Messages</span>
+                    </a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/pages/login.html" class="login-btn">Login</a>
+                    <a href="/pages/register.html" class="register-btn">Register</a>
+                </div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your Campus Marketplace</h1>
+                <p>Buy, sell, and trade with fellow students. Safe, easy, and campus-focused.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose UniTrade?</h2>
+            <div class="grid grid-3">
+                <div class="feature-card card">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Student Verified</h3>
+                    <p>Trade exclusively with verified students from your university.</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Direct Messaging</h3>
+                    <p>Communicate safely with other students through our platform.</p>
+                </div>
+                <div class="feature-card card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Campus Focused</h3>
+                    <p>Find items near you, within your campus community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Browse Categories</h2>
+            <div class="grid grid-4">
+                <a href="/pages/browse.html?category=textbooks" class="category-card card">
+                    <i class="fas fa-book"></i>
+                    <h3>Textbooks</h3>
+                </a>
+                <a href="/pages/browse.html?category=electronics" class="category-card card">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Electronics</h3>
+                </a>
+                <a href="/pages/browse.html?category=furniture" class="category-card card">
+                    <i class="fas fa-couch"></i>
+                    <h3>Furniture</h3>
+                </a>
+                <a href="/pages/browse.html?category=other" class="category-card card">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Other</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>UNITRADE</h2>
+                    <p>Your trusted campus marketplace</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <a href="/pages/about.html">About Us</a>
+                        <a href="/pages/contact.html">Contact</a>
+                        <a href="/pages/terms.html">Terms of Service</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Categories</h3>
+                        <a href="/pages/browse.html?category=textbooks">Textbooks</a>
+                        <a href="/pages/browse.html?category=electronics">Electronics</a>
+                        <a href="/pages/browse.html?category=furniture">Furniture</a>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Support</h3>
+                        <a href="/pages/faq.html">FAQ</a>
+                        <a href="/pages/safety.html">Safety Tips</a>
+                        <a href="/pages/contact.html">Report an Issue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 UniTrade. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

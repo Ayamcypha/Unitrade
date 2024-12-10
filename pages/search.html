@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - UniTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="nav-left">
+                <div class="nav-brand">
+                    <a href="/"><h1>UNITRADE</h1></a>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="navSearchInput" placeholder="Search items...">
+                    <button onclick="window.location.href='/pages/search.html?q=' + document.getElementById('navSearchInput').value">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/pages/browse.html">Browse</a>
+                    <a href="/pages/post-ad.html">Post Ad</a>
+                    <a href="/pages/messages.html">
+                        <i class="fas fa-envelope"></i>
+                        <span>Messages</span>
+                    </a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/pages/login.html" class="login-btn">Login</a>
+                    <a href="/pages/register.html" class="register-btn">Register</a>
+                </div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Content -->
+    <div class="search-container">
+        <!-- Main Search Bar -->
+        <div class="main-search">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="What are you looking for?">
+                <button id="searchBtn">
+                    <i class="fas fa-search"></i>
+                    <span>Search</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Results Area -->
+        <div class="search-content">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <div class="filters-header">
+                    <h3>Filters</h3>
+                    <button id="clearFilters" class="clear-btn">
+                        <i class="fas fa-times"></i>
+                        Clear All
+                    </button>
+                </div>
+
+                <div class="filter-section">
+                    <h4>Categories</h4>
+                    <div class="filter-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="textbooks">
+                            <span class="checkbox-custom"></span>
+                            Textbooks
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="electronics">
+                            <span class="checkbox-custom"></span>
+                            Electronics
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="furniture">
+                            <span class="checkbox-custom"></span>
+                            Furniture
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="clothing">
+                            <span class="checkbox-custom"></span>
+                            Clothing
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="services">
+                            <span class="checkbox-custom"></span>
+                            Services
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="other">
+                            <span class="checkbox-custom"></span>
+                            Other
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h4>Price Range</h4>
+                    <div class="price-range">
+                        <div class="price-input">
+                            <span class="currency">GH₵</span>
+                            <input type="number" id="minPrice" placeholder="Min">
+                        </div>
+                        <div class="price-separator">to</div>
+                        <div class="price-input">
+                            <span class="currency">GH₵</span>
+                            <input type="number" id="maxPrice" placeholder="Max">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h4>Condition</h4>
+                    <div class="filter-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="new">
+                            <span class="checkbox-custom"></span>
+                            New
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="like-new">
+                            <span class="checkbox-custom"></span>
+                            Like New
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="good">
+                            <span class="checkbox-custom"></span>
+                            Good
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="fair">
+                            <span class="checkbox-custom"></span>
+                            Fair
+                        </label>
+                    </div>
+                </div>
+
+                <button id="applyFilters" class="apply-filters-btn">
+                    <i class="fas fa-filter"></i>
+                    Apply Filters
+                </button>
+            </aside>
+
+            <!-- Results Area -->
+            <main class="results-area">
+                <div class="results-header">
+                    <div class="results-count">
+                        <span id="resultCount">0</span> results found
+                    </div>
+                    <div class="results-sort">
+                        <label for="sortSelect">Sort by:</label>
+                        <select id="sortSelect">
+                            <option value="relevance">Most Relevant</option>
+                            <option value="newest">Newest First</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Results Grid -->
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Results will be populated by JavaScript -->
+                </div>
+
+                <!-- No Results Message -->
+                <div id="noResults" class="no-results hidden">
+                    <div class="no-results-content">
+                        <i class="fas fa-search"></i>
+                        <h3>No results found</h3>
+                        <p>Try adjusting your search terms or filters</p>
+                    </div>
+                </div>
+
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="loading-spinner hidden">
+                    <div class="spinner"></div>
+                    <p>Searching for items...</p>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button id="prevPage" class="page-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        Previous
+                    </button>
+                    <div class="page-numbers" id="pageNumbers">
+                        <!-- Page numbers will be populated by JavaScript -->
+                    </div>
+                    <button id="nextPage" class="page-btn" disabled>
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>

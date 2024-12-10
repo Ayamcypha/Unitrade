@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - UniTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/"><h1>UNITRADE</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/pages/browse.html">Browse</a>
+            <a href="/pages/post-ad.html">Post Ad</a>
+            <a href="/pages/messages.html">Messages</a>
+            <div class="auth-buttons">
+                <a href="/pages/login.html" class="login-btn">Login</a>
+                <a href="/pages/register.html" class="register-btn active">Register</a>
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Registration Form -->
+    <div class="auth-container">
+        <div class="auth-form">
+            <h2>Create Account</h2>
+            <form id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <small class="form-hint">Please use your university email</small>
+                </div>
+                <div class="form-group">
+                    <label for="university">University</label>
+                    <input type="text" id="university" name="university" required>
+                </div>
+                <div class="form-group">
+                    <label for="student_id">Student ID</label>
+                    <input type="text" id="student_id" name="student_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="8">
+                    <small class="form-hint">Minimum 8 characters</small>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
+                </div>
+                <button type="submit" class="auth-button">Register</button>
+            </form>
+            <p class="auth-link">Already have an account? <a href="/pages/login.html">Login here</a></p>
+        </div>
+    </div>
+
+    <!-- Toast Messages -->
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

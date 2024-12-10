@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - UniTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="../index.html"><h1>UNITRADE</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="browse.html">Browse</a>
+            <a href="post-ad.html">Post Ad</a>
+            <a href="messages.html">Messages</a>
+            <div class="auth-buttons">
+                <a href="profile.html" class="profile-btn active">Profile</a>
+                <button class="logout-btn" onclick="handleLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-cover"></div>
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <img src="../assets/default-avatar.png" alt="Profile Picture" id="profileAvatar">
+                    <button class="edit-avatar" onclick="document.getElementById('avatarInput').click()">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <input type="file" id="avatarInput" hidden accept="image/*">
+                </div>
+                <div class="profile-details">
+                    <h1 id="userName"></h1>
+                    <p class="university"><i class="fas fa-university"></i> <span id="userUniversity"></span></p>
+                    <p class="join-date"><i class="fas fa-calendar-alt"></i> <span id="joinDate"></span></p>
+                </div>
+                <button class="edit-profile-btn" onclick="openEditProfile()">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Stats -->
+        <div class="profile-stats">
+            <div class="stat-card">
+                <i class="fas fa-tag"></i>
+                <h3 id="activeListings">0</h3>
+                <p>Active Listings</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-shopping-cart"></i>
+                <h3 id="itemsSold">0</h3>
+                <p>Items Sold</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <h3 id="userRating">0.0</h3>
+                <p>Rating</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-comments"></i>
+                <h3 id="reviewCount">0</h3>
+                <p>Reviews</p>
+            </div>
+        </div>
+
+        <!-- Profile Tabs -->
+        <div class="profile-tabs">
+            <button class="tab-btn active" data-tab="listings">
+                <i class="fas fa-list"></i> My Listings
+            </button>
+            <button class="tab-btn" data-tab="reviews">
+                <i class="fas fa-star"></i> Reviews
+            </button>
+            <button class="tab-btn" data-tab="saved">
+                <i class="fas fa-bookmark"></i> Saved Items
+            </button>
+            <button class="tab-btn" data-tab="settings">
+                <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- My Listings Tab -->
+            <div class="tab-pane active" id="listings">
+                <div class="listings-grid" id="listingsGrid">
+                    <!-- Listings will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Reviews Tab -->
+            <div class="tab-pane" id="reviews">
+                <div class="reviews-list" id="reviewsList">
+                    <!-- Reviews will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Saved Items Tab -->
+            <div class="tab-pane" id="saved">
+                <div class="saved-items-grid" id="savedItemsGrid">
+                    <!-- Saved items will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-pane" id="settings">
+                <div class="settings-form">
+                    <!-- Settings form will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Messages -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm">
+                <!-- Form fields will be dynamically loaded here -->
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+</html>

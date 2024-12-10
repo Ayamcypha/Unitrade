@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details - UniTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/listing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="nav-left">
+                <div class="nav-brand">
+                    <a href="/"><h1>UNITRADE</h1></a>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="navSearchInput" placeholder="Search items...">
+                    <button onclick="window.location.href='/pages/search.html?q=' + document.getElementById('navSearchInput').value">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/pages/browse.html">Browse</a>
+                    <a href="/pages/post-ad.html">Post Ad</a>
+                    <a href="/pages/messages.html">
+                        <i class="fas fa-envelope"></i>
+                        <span>Messages</span>
+                    </a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/pages/login.html" class="login-btn">Login</a>
+                    <a href="/pages/register.html" class="register-btn">Register</a>
+                </div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Listing Details -->
+    <div class="listing-container">
+        <div class="listing-header">
+            <div class="listing-title">
+                <h1 id="listingTitle"></h1>
+                <div class="listing-price" id="listingPrice"></div>
+            </div>
+            <div class="listing-actions">
+                <button id="saveButton" class="btn secondary">
+                    <i class="far fa-bookmark"></i>
+                    <span>Save</span>
+                </button>
+                <button id="chatButton" class="btn primary">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat with Seller</span>
+                </button>
+                <button id="offerButton" class="btn primary">
+                    <i class="fas fa-tag"></i>
+                    <span>Make Offer</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="listing-content">
+            <div class="listing-gallery" id="imageGallery">
+                <!-- Images will be populated by JavaScript -->
+            </div>
+
+            <div class="listing-details">
+                <div class="detail-section">
+                    <h2>Description</h2>
+                    <p id="listingDescription"></p>
+                </div>
+
+                <div class="detail-section">
+                    <h2>Details</h2>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="label">Condition:</span>
+                            <span id="listingCondition"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Category:</span>
+                            <span id="listingCategory"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Location:</span>
+                            <span id="listingLocation"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h2>Seller Information</h2>
+                    <div class="seller-info">
+                        <div class="seller-profile">
+                            <img src="../images/default-avatar.png" alt="Seller" id="sellerAvatar">
+                            <div class="seller-details">
+                                <h3 id="sellerName"></h3>
+                                <div class="seller-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span id="sellerRating"></span>
+                                </div>
+                                <p id="sellerJoinDate"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Messages -->
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/listing.js"></script>
+</body>
+</html>

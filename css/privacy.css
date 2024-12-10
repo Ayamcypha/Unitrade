@@ -1,0 +1,146 @@
+.privacy-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.privacy-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.privacy-header h1 {
+    color: #4f46e5;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.privacy-header p {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.privacy-content {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.privacy-section {
+    margin-bottom: 2.5rem;
+}
+
+.privacy-section:last-child {
+    margin-bottom: 0;
+}
+
+.privacy-section h2 {
+    color: #1f2937;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4f46e5;
+    display: inline-block;
+}
+
+.privacy-section h3 {
+    color: #374151;
+    font-size: 1.25rem;
+    margin: 1.5rem 0 1rem;
+}
+
+.privacy-section p {
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.privacy-section ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+
+.privacy-section ul li {
+    color: #4b5563;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.5;
+}
+
+.privacy-section ul li::before {
+    content: "•";
+    color: #4f46e5;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.privacy-section strong {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.privacy-section a {
+    color: #4f46e5;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.privacy-section a:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .privacy-container {
+        margin: 1rem auto;
+        padding: 0 1rem;
+    }
+
+    .privacy-header h1 {
+        font-size: 2rem;
+    }
+
+    .privacy-content {
+        padding: 1.5rem;
+    }
+
+    .privacy-section h2 {
+        font-size: 1.25rem;
+    }
+
+    .privacy-section h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar {
+        display: none;
+    }
+
+    .privacy-container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .privacy-content {
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .privacy-section {
+        page-break-inside: avoid;
+    }
+
+    .privacy-section a {
+        text-decoration: underline;
+    }
+}

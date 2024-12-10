@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Advertisement - UniTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/post-ad.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body background="post.jpg">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="../index.html"><h1>UNITRADE</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="browse.html">Browse</a>
+            <a href="post-ad.html" class="active">Post Ad</a>
+            <a href="messages.html">Messages</a>
+            <div class="auth-buttons">
+                <!-- Will be populated by auth.js -->
+            </div>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+       
+
+    <!-- Post Ad Form -->
+    <div class="post-ad-container">
+        <div class="post-ad-box">
+            <h2>Post Your Advertisement</h2>
+            <div class="payment-notice">
+                <i class="fas fa-info-circle"></i>
+                <p>A small fee will be charged to post your advertisement</p>
+            </div>
+            <form id="postAdForm" onsubmit="return handlePostAd(event)">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select a category</option>
+                        <option value="textbooks">Textbooks</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="services">Services</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price (GHS)</label>
+                    <input type="number" id="price" name="price" required min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" required maxlength="1000" rows="5"></textarea>
+                    <div class="char-count">0/1000</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Product Images</label>
+                    <div class="image-upload-container">
+                        <div class="image-preview-grid">
+                            <div class="image-upload-box">
+                                <input type="file" accept="image/*" onchange="handleImageUpload(this, 0)">
+                                <i class="fas fa-plus"></i>
+                                <div class="preview"></div>
+                            </div>
+                            <div class="image-upload-box">
+                                <input type="file" accept="image/*" onchange="handleImageUpload(this, 1)">
+                                <i class="fas fa-plus"></i>
+                                <div class="preview"></div>
+                            </div>
+                            <div class="image-upload-box">
+                                <input type="file" accept="image/*" onchange="handleImageUpload(this, 2)">
+                                <i class="fas fa-plus"></i>
+                                <div class="preview"></div>
+                            </div>
+                            <div class="image-upload-box">
+                                <input type="file" accept="image/*" onchange="handleImageUpload(this, 3)">
+                                <i class="fas fa-plus"></i>
+                                <div class="preview"></div>
+                            </div>
+                        </div>
+                        <p class="image-hint">Click to add images (Max 2MB each)</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required placeholder="e.g., North Campus, Library">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Post Advertisement
+                    </button>
+                </div>    
+                </form> 
+            </div>
+        </div>
+
+        <!-- Payment Modal -->
+        <div id="paymentModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Payment Required</h3>
+                    <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="payment-info">
+                        <p>To post your advertisement, a payment of <strong>10 GHS</strong> is required.</p>
+                        <p>Please enter your MTN Mobile Money number below:</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobileMoneyNumber">MTN Mobile Money Number</label>
+                        <input type="tel" id="mobileMoneyNumber" placeholder="233XXXXXXXXX" required>
+                        <small class="hint">Format: 233 followed by your 9-digit MTN number</small>
+                    </div>
+                    <div class="payment-steps">
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>Enter your MTN Mobile Money number</li>
+                            <li>Click "Pay Now"</li>
+                            <li>Check your phone for the payment prompt</li>
+                            <li>Enter your PIN to confirm payment</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closePaymentModal()">Cancel</button>
+                    <button id="paymentSubmitBtn" class="btn btn-primary" onclick="handlePaymentSubmit()">
+                        <span>Pay Now</span>
+                        <i id="paymentSpinner" class="fas fa-spinner fa-spin" style="display: none;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Messages -->
+        <div id="toast" class="toast"></div>
+
+        <script src="../js/auth.js"></script>
+        <script src="../js/post-ad.js"></script>
+        <script src="../js/payment.js"></script>
+        <script>
+            // Initialize payment functionality
+            initializePayment();
+
+            // Handle form submission
+            async function handlePostAd(event) {
+                event.preventDefault();
+                
+                // Open payment modal first
+                openPaymentModal();
+                return false;
+            }
+
+            // Handle payment submission
+            async function handlePaymentSubmit() {
+                const phoneNumber = document.getElementById('mobileMoneyNumber').value;
+                
+                // Validate phone number
+                if (!validateMTNNumber(phoneNumber)) {
+                    showErrorMessage('Please enter a valid MTN Mobile Money number');
+                    return;
+                }
+
+                // Process payment
+                const success = await processPayment(phoneNumber);
+                
+                if (success) {
+                    // Submit the form after successful payment
+                    document.getElementById('postAdForm').submit();
+                }
+            }
+        </script>
+    </body>
+</html>
