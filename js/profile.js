@@ -4,10 +4,14 @@ const API_ENDPOINTS = {
     updateProfile: '/api/profile/update',
     updatePassword: '/api/profile/password',
     updateNotifications: '/api/profile/notifications',
-    uploadPicture: '/api/profile/picture'
+    uploadPicture: '/api/profile/picture',
+    listings: '/api/listings',
+    reviews: '/api/reviews',
+    savedItems: '/api/saved-items'
 };
 
 let cropper = null;
+let currentUser = null;
 
 // DOM Elements
 const tabButtons = document.querySelectorAll('.tab-btn');
@@ -17,25 +21,16 @@ const avatarInput = document.getElementById('avatarInput');
 const settingsForm = document.getElementById('settingsForm');
 const toast = document.getElementById('toast');
 
-// Mock user data - In real app, this would come from an API
-let currentUser = {
-    name: 'John Doe',
-    email: 'john.doe@ug.edu.gh',
-    university: 'ug',
-    phone: '+233 20 123 4567',
-    bio: 'Computer Science student at UG. Passionate about technology and trading.',
-    avatar: '../assets/default-avatar.png',
-    coverImage: null
-};
-
-// Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    loadUserData();
-    loadListings();
-    loadReviews();
-    loadSavedItems();
+// Initialize on document load
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadUserData();
     setupEventListeners();
     initializeImageCropper();
+    await Promise.all([
+        loadListings(),
+        loadReviews(),
+        loadSavedItems()
+    ]);
 });
 
 // Setup Event Listeners
@@ -56,6 +51,26 @@ function setupEventListeners() {
         switchTab('settings');
         document.getElementById('settingsForm').scrollIntoView({ behavior: 'smooth' });
     });
+
+    // Edit Profile Button
+    const editProfileBtn = document.querySelector('.edit-profile-btn');
+    if (editProfileBtn) {
+        editProfileBtn.addEventListener('click', openEditProfile);
+    }
+
+    // Settings Form
+    const settingsForm = document.querySelector('.settings-form');
+    if (settingsForm) {
+        settingsForm.addEventListener('submit', handleSaveProfile);
+        
+        const cancelBtn = settingsForm.querySelector('.btn.secondary');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleCancelEdit();
+            });
+        }
+    }
 }
 
 // Initialize image cropper
@@ -202,41 +217,224 @@ async function handleSettingsSubmit(event) {
 
 // Update profile UI with current user data
 function updateProfileUI() {
+    if (!currentUser) return;
+
     // Update header info
-    document.getElementById('userName').textContent = currentUser.name;
-    document.getElementById('userUniversity').textContent = 
-        document.getElementById('university').options[
-            document.getElementById('university').selectedIndex
-        ].text;
+    const userName = document.getElementById('userName');
+    const userUniversity = document.getElementById('userUniversity');
+    const universitySelect = document.getElementById('profileUniversity');
+
+    if (userName) userName.textContent = currentUser.name;
+    if (userUniversity && universitySelect) {
+        userUniversity.textContent = universitySelect.options[
+            universitySelect.selectedIndex
+        ]?.text || '';
+    }
     
     // Update form fields
-    document.getElementById('fullName').value = currentUser.name;
-    document.getElementById('email').value = currentUser.email;
-    document.getElementById('university').value = currentUser.university;
-    document.getElementById('phone').value = currentUser.phone;
-    document.getElementById('bio').value = currentUser.bio;
+    const fields = {
+        'profileFullName': currentUser.name,
+        'profileEmail': currentUser.email,
+        'profileUniversity': currentUser.university,
+        'profilePhone': currentUser.phone,
+        'profileBio': currentUser.bio
+    };
+
+    Object.entries(fields).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) element.value = value;
+    });
 
     // Update avatar
-    if (currentUser.avatar) {
+    const profileAvatar = document.getElementById('profileAvatar');
+    if (profileAvatar && currentUser.avatar) {
         profileAvatar.src = currentUser.avatar;
     }
 }
 
 // Load user data
-function loadUserData() {
-    updateProfileUI();
+async function loadUserData() {
+    try {
+        // TODO: Replace with actual API call
+        // const response = await fetch(API_ENDPOINTS.profile);
+        // currentUser = await response.json();
+        
+        // For now, use minimal user data
+        currentUser = {
+            name: '',
+            email: '',
+            university: '',
+            phone: '',
+            bio: '',
+            avatar: '../assets/default-avatar.png'
+        };
+
+        updateProfileUI();
+    } catch (error) {
+        console.error('Error loading user data:', error);
+        showToast('Failed to load user data', 'error');
+    }
 }
 
-// Switch tabs
-function switchTab(tabId) {
-    // Update buttons
-    tabButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.tab === tabId);
+// Load listings
+async function loadListings() {
+    try {
+        // TODO: Replace with actual API call
+        // const response = await fetch(API_ENDPOINTS.listings);
+        // const listings = await response.json();
+        const listingsGrid = document.getElementById('listingsGrid');
+        if (listingsGrid) {
+            listingsGrid.innerHTML = '<p>No listings found</p>';
+        }
+    } catch (error) {
+        console.error('Error loading listings:', error);
+        showToast('Failed to load listings', 'error');
+    }
+}
+
+// Load reviews
+async function loadReviews() {
+    try {
+        // TODO: Replace with actual API call
+        // const response = await fetch(API_ENDPOINTS.reviews);
+        // const reviews = await response.json();
+        const reviewsList = document.getElementById('reviewsList');
+        if (reviewsList) {
+            reviewsList.innerHTML = '<p>No reviews yet</p>';
+        }
+    } catch (error) {
+        console.error('Error loading reviews:', error);
+        showToast('Failed to load reviews', 'error');
+    }
+}
+
+// Load saved items
+async function loadSavedItems() {
+    try {
+        // TODO: Replace with actual API call
+        // const response = await fetch(API_ENDPOINTS.savedItems);
+        // const savedItems = await response.json();
+        const savedItemsGrid = document.getElementById('savedItemsGrid');
+        if (savedItemsGrid) {
+            savedItemsGrid.innerHTML = '<p>No saved items</p>';
+        }
+    } catch (error) {
+        console.error('Error loading saved items:', error);
+        showToast('Failed to load saved items', 'error');
+    }
+}
+
+// Edit Profile Functions
+function openEditProfile() {
+    // Switch to settings tab
+    const settingsTab = document.querySelector('[data-tab="settings"]');
+    if (settingsTab) {
+        switchTab('settings');
+    }
+
+    // Enable form fields
+    const formFields = document.querySelectorAll('.settings-form input, .settings-form select, .settings-form textarea');
+    formFields.forEach(field => {
+        field.disabled = false;
     });
 
-    // Update content
-    tabPanes.forEach(pane => {
-        pane.classList.toggle('active', pane.id === tabId);
+    // Show action buttons
+    const actionButtons = document.querySelector('.settings-action-buttons');
+    if (actionButtons) {
+        actionButtons.style.display = 'flex';
+    }
+
+    // Scroll to form
+    const settingsForm = document.querySelector('.settings-form');
+    if (settingsForm) {
+        settingsForm.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function handleCancelEdit() {
+    // Reset form to original values
+    const form = document.querySelector('.settings-form');
+    if (form) {
+        form.reset();
+        populateFormWithUserData();
+    }
+
+    // Disable form fields
+    const formFields = document.querySelectorAll('.settings-form input, .settings-form select, .settings-form textarea');
+    formFields.forEach(field => {
+        field.disabled = true;
+    });
+
+    // Hide action buttons
+    const actionButtons = document.querySelector('.settings-action-buttons');
+    if (actionButtons) {
+        actionButtons.style.display = 'none';
+    }
+}
+
+async function handleSaveProfile(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    const saveButton = form.querySelector('.btn.primary');
+    if (saveButton) {
+        saveButton.classList.add('loading');
+        saveButton.disabled = true;
+    }
+
+    try {
+        // TODO: Replace with actual API call
+        // const response = await fetch(API_ENDPOINTS.updateProfile, {
+        //     method: 'POST',
+        //     body: formData
+        // });
+        // const updatedUser = await response.json();
+        
+        // Update currentUser data
+        currentUser = {
+            ...currentUser,
+            name: formData.get('fullName'),
+            email: formData.get('email'),
+            university: formData.get('university'),
+            phone: formData.get('phone'),
+            bio: formData.get('bio')
+        };
+
+        // Update profile display
+        updateProfileUI();
+        
+        showToast('Profile updated successfully!', 'success');
+        handleCancelEdit();
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        showToast('Failed to update profile. Please try again.', 'error');
+    } finally {
+        if (saveButton) {
+            saveButton.classList.remove('loading');
+            saveButton.disabled = false;
+        }
+    }
+}
+
+function populateFormWithUserData() {
+    const form = document.querySelector('.settings-form');
+    if (!form || !currentUser) return;
+
+    const fields = {
+        'profileFullName': currentUser.name,
+        'profileEmail': currentUser.email,
+        'profileUniversity': currentUser.university,
+        'profilePhone': currentUser.phone,
+        'profileBio': currentUser.bio
+    };
+
+    Object.entries(fields).forEach(([id, value]) => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.value = value;
+        }
     });
 }
 
@@ -251,107 +449,15 @@ function showToast(message, type = 'info') {
     }, 3000);
 }
 
-// Load mock data functions
-function loadListings() {
-    const mockListings = [
-        {
-            id: 1,
-            title: 'MacBook Pro 2021',
-            price: 'GH₵ 12,000',
-            image: '../assets/laptop.jpg',
-            status: 'active'
-        },
-        {
-            id: 2,
-            title: 'iPhone 13 Pro',
-            price: 'GH₵ 8,000',
-            image: '../assets/phone.jpg',
-            status: 'sold'
-        }
-    ];
+// Switch tab
+function switchTab(tabId) {
+    // Update buttons
+    tabButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
 
-    const listingsGrid = document.getElementById('listingsGrid');
-    listingsGrid.innerHTML = mockListings.map(listing => `
-        <div class="listing-card">
-            <div class="listing-image">
-                <img src="${listing.image}" alt="${listing.title}">
-            </div>
-            <div class="listing-details">
-                <h3>${listing.title}</h3>
-                <p class="listing-price">${listing.price}</p>
-                <span class="listing-status status-${listing.status}">
-                    ${listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
-                </span>
-            </div>
-        </div>
-    `).join('');
-}
-
-function loadReviews() {
-    const mockReviews = [
-        {
-            id: 1,
-            reviewer: 'Jane Smith',
-            avatar: '../assets/avatar1.jpg',
-            rating: 5,
-            date: '2024-03-10',
-            content: 'Great seller! Item was exactly as described and delivery was prompt.'
-        },
-        {
-            id: 2,
-            reviewer: 'Mike Johnson',
-            avatar: '../assets/avatar2.jpg',
-            rating: 4,
-            date: '2024-03-08',
-            content: 'Good communication and fair price. Would buy from again.'
-        }
-    ];
-
-    const reviewsList = document.getElementById('reviewsList');
-    reviewsList.innerHTML = mockReviews.map(review => `
-        <div class="review-card">
-            <div class="review-header">
-                <div class="reviewer-avatar">
-                    <img src="${review.avatar}" alt="${review.reviewer}">
-                </div>
-                <div class="reviewer-info">
-                    <h4>${review.reviewer}</h4>
-                    <div class="review-rating">
-                        ${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}
-                    </div>
-                </div>
-            </div>
-            <p class="review-content">${review.content}</p>
-        </div>
-    `).join('');
-}
-
-function loadSavedItems() {
-    const mockSavedItems = [
-        {
-            id: 1,
-            title: 'MacBook Pro 2021',
-            price: 'GH₵ 12,000',
-            image: '../assets/laptop.jpg'
-        },
-        {
-            id: 2,
-            title: 'iPhone 13 Pro',
-            price: 'GH₵ 8,000',
-            image: '../assets/phone.jpg'
-        }
-    ];
-
-    const savedItemsGrid = document.getElementById('savedItemsGrid');
-    savedItemsGrid.innerHTML = mockSavedItems.map(item => `
-        <div class="listing-card">
-            <div class="listing-image">
-                <img src="${item.image}" alt="${item.title}">
-            </div>
-            <div class="listing-details">
-                <h3>${item.title}</h3>
-                <p class="listing-price">${item.price}</p>
-            </div>
-        </div>
-    `).join('');
+    // Update content
+    tabPanes.forEach(pane => {
+        pane.classList.toggle('active', pane.id === tabId);
+    });
 }
