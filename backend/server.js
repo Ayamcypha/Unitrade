@@ -33,26 +33,7 @@ if (!fs.existsSync(path.join(__dirname, 'uploads'))) {
     fs.mkdirSync(path.join(__dirname, 'uploads'), { recursive: true });
 }
 
-// Serve static files
-app.use(express.static(path.join(__dirname, '../')));
-
-// Serve index.html for all routes except /api
-app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) {
-        next();
-    } else {
-        res.sendFile(path.join(__dirname, '../index.html'));
-    }
-});
-
-// MongoDB Connection
-console.log('Attempting to connect to MongoDB...');
-console.log('MongoDB URI:', process.env.MONGODB_URI ? 'URI is defined' : 'URI is undefined');
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Successfully connected to MongoDB!'))
-    .catch(err => console.error('Could not connect to MongoDB:', err.message));
-
-// Routes
+// Only handle API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/listings', listingRoutes);
@@ -74,6 +55,13 @@ app.use((err, req, res, next) => {
             : 'An unexpected error occurred'
     });
 });
+
+// MongoDB Connection
+console.log('Attempting to connect to MongoDB...');
+console.log('MongoDB URI:', process.env.MONGODB_URI ? 'URI is defined' : 'URI is undefined');
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('Successfully connected to MongoDB!'))
+    .catch(err => console.error('Could not connect to MongoDB:', err.message));
 
 // Start server
 app.listen(PORT, () => {

@@ -124,7 +124,40 @@
             <!-- Settings Tab -->
             <div class="tab-pane" id="settings">
                 <div class="settings-form">
-                    <!-- Settings form will be dynamically loaded here -->
+                    <form id="settingsForm">
+                        <div class="form-group">
+                            <label for="profileFullName">Full Name</label>
+                            <input type="text" id="profileFullName" name="fullName" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileEmail">Email</label>
+                            <input type="email" id="profileEmail" name="email" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileUniversity">University</label>
+                            <select id="profileUniversity" name="university" disabled>
+                                <option value="ug">University of Ghana</option>
+                                <option value="knust">Kwame Nkrumah University of Science and Technology</option>
+                                <option value="ucc">University of Cape Coast</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="profilePhone">Phone Number</label>
+                            <input type="tel" id="profilePhone" name="phone" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileBio">Bio</label>
+                            <textarea id="profileBio" name="bio" rows="4" disabled></textarea>
+                        </div>
+                        <div class="settings-action-buttons" style="display: none;">
+                            <button type="submit" class="btn primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <button type="button" class="btn secondary cancel-edit-btn">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
